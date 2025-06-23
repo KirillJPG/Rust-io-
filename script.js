@@ -1,7 +1,5 @@
-function sum(){
-    let num = 0 
-    return function (){
-        num ++
-        console.log(num)
-    }
-}
+'use strict'
+import { Runtime } from "./Runtime.js"
+const canvas = document.querySelector(".canvas")
+console.log("start")
+const runtime = new Runtime(canvas)
