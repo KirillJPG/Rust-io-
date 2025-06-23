@@ -8,9 +8,9 @@ export class Runtime{
         this.canvas = canvas
         this.listEntities = []
         this.ctx = canvas.getContext("2d")
-        this.canvas.addEventListener("click",this.onClick)
-        document.addEventListener("keydown",this.onKey)
-        this.canvas.addEventListener("mousemove",this.onMouseMove)
+        this.canvas.addEventListener("click",(e)=>this.onClick(e))
+        document.addEventListener("keydown",(e)=>this.onKey(e))
+        this.canvas.addEventListener("mousemove",(e)=>this.onMouseMove(e))
         setInterval(()=>this.update(),1000)
     }
     getEntities(){
@@ -33,6 +33,7 @@ export class Runtime{
     }
     onMouseMove(e){
         const newEvent = new MouseMoveEvent(e)
+        
         this.listEntities.forEach(e=>{
             e.callEvent(newEvent)
         })   

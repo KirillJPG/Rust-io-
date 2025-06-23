@@ -6,6 +6,7 @@ export class Entity{
         this.name = name
         this.desc = desc
         this.runtime = runtime
+        this.runtime.addEntity(this)
         this.uid = this.generateUid() 
         this.components = components
     }
@@ -15,10 +16,14 @@ export class Entity{
     addListenEvent(nameEvent){
         this.listenEvents.push(nameEvent)
     }
+    getListenEvents(){
+        return this.listenEvents
+    }
     getComponents(){
         return this.components
     }
     addComponent(comp){
+        if (this.getComponent(comp.getName())) return; 
         this.components.push(comp)
     }
     generateUid(){
@@ -41,10 +46,17 @@ export class Entity{
         return true
     }
     update(){
-        
+
+    }
+    getComponent(compName){
+        const comp = this.getComponents().filter(e=>e.getName()==compName)[0]
+        return comp
     }
     callEvent(event){
-        if (this.listenEvents.includes(event.getName())){
-        }
+        if (this.getListenEvents().includes(event.getName())){
+            this.getComponents().forEach(e=>{
+                e.callEvent(event)
+            })
+        } 
     }
 }
