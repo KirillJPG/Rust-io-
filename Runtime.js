@@ -5,8 +5,9 @@ import {KeyUpEvent} from "./Events/KeyUpEvent.js"
 import {MouseMoveEvent} from "./Events/MouseMoveEvent.js"
 export class Runtime{
     listEntities = []
-    constructor(canvas){
+    constructor(canvas,camera=null){
         this.canvas = canvas
+        this.camera = camera
         this.listEntities = []
         this.ctx = canvas.getContext("2d")
         this.canvas.addEventListener("click",(e)=>this.onClick(e))
@@ -15,6 +16,12 @@ export class Runtime{
         this.canvas.addEventListener("mousemove",(e)=>this.onMouseMove(e))
         setInterval(()=>this.update(),1)
         this.resize()
+    }
+    getCamera(){
+        return this.camera
+    }
+    setCamera(camera){
+        this.camera = camera
     }
     resize(){
         const bound = this.canvas.getBoundingClientRect()

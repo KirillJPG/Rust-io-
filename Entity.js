@@ -48,6 +48,15 @@ export class Entity{
     getContext(){
         return this.runtime.getContext()
     }
+    getRuntime(){
+        return this.runtime
+    }
+    getCamera(){
+        return this.runtime.getCamera()
+    }
+    setCamera(camera){
+        this.runtime.setCamera(camera)
+    }
     update(){
         this.getComponents().forEach(e=>{
             e.update()

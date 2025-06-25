@@ -3,14 +3,18 @@ import { TransformComponent } from "./TransformComponent.js";
 
 export class SpriteComponent extends Component{
     constructor(entity){
-        super("SpriteComponent",entity)
+        super("Sprite",entity)
     }
-    draw(x,y){
+    draw(x,y,w,h){
     }
     update(){
+        console.log(this.entity)
         const transform = this.entity.getComponent(new TransformComponent().getName())
+        const camera = this.getCamera()
+        const {x:xCamera,y:yCamera} = camera.getPosition()
         const {x,y} = transform.getPosition()
-        this.draw(x,y)
+        const {w,h} = transform.getSize()
+        this.draw(x-xCamera,y-yCamera,w,h)
     }
     
 }

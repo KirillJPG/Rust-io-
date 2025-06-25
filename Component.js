@@ -23,6 +23,12 @@ export class Component{
         if (!this.entity.getContext()) return null
         return this.entity.getContext() 
     }
+    getCamera(){
+        return this.entity.getCamera()
+    }
+    setCamera(camera){
+        this.entity.setCamera(camera)
+    }
     update(){
 
     }
