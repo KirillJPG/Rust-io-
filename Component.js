@@ -14,9 +14,14 @@ export class Component{
     }
     addListensEntity(){
         const events = Object.keys(this.getListenEvents())
+        if (!this.entity) return;
         events.forEach(e=>{
             this.entity.addListenEvent(e)
         }) 
+    }
+    getContext(){
+        if (!this.entity.getContext()) return null
+        return this.entity.getContext() 
     }
     update(){
 

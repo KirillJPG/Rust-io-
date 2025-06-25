@@ -3,17 +3,22 @@ import { KeyEvent } from "../Events/KeyEvent.js"
 export class TransformComponent extends Component{
     x = 0
     y = 0
-    constructor(entity){
+    rotate = 0
+    constructor(entity,x=0,y=0){
         super("TransformComponent",entity)
-        this.listenEvents[new KeyEvent().getName()] = (event)=>{
-            this.onKey(event)
-        } 
-        this.addListensEntity()    
+        this.x = x
+        this.y = y
     }
-    onKey(event){
-
+    
+    setRotate(rotate){
+        this.rotate = rotate
+    }
+    getRotate(){
+        return this.rotate
     }
     getPosition(){
+        const x = this.x
+        const y = this.y
         return {x,y}
     }
     setY(y){

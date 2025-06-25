@@ -1,6 +1,7 @@
 import { Entity } from "./Entity.js"
 import {ClickEvent} from "./Events/ClickEvent.js"
 import {KeyEvent} from "./Events/KeyEvent.js"
+import {KeyUpEvent} from "./Events/KeyUpEvent.js"
 import {MouseMoveEvent} from "./Events/MouseMoveEvent.js"
 export class Runtime{
     listEntities = []
@@ -10,9 +11,18 @@ export class Runtime{
         this.ctx = canvas.getContext("2d")
         this.canvas.addEventListener("click",(e)=>this.onClick(e))
         document.addEventListener("keydown",(e)=>this.onKey(e))
+        document.addEventListener("keyup",(e)=>this.onKeyUp(e))
         this.canvas.addEventListener("mousemove",(e)=>this.onMouseMove(e))
-        setInterval(()=>this.update(),1000)
+        setInterval(()=>this.update(),1)
+        this.resize()
     }
+    resize(){
+        const bound = this.canvas.getBoundingClientRect()
+        const width = bound.width
+        const height = bound.height 
+        this.canvas.width = +width
+        this.canvas.height = +height
+    } 
     getEntities(){
         return this.listEntities
     }
@@ -25,20 +35,33 @@ export class Runtime{
             e.callEvent(newEvent)
         })
     }
+    onKeyUp(e){
+        const newEvent = new KeyUpEvent(e)
+        this.listEntities.forEach(e=>{
+            e.callEvent(newEvent)
+        })
+    }
     onKey(e){
         const newEvent = new KeyEvent(e)
         this.listEntities.forEach(e=>{
             e.callEvent(newEvent)
         })
     }
+    getContext(){
+        return this.ctx
+    }
     onMouseMove(e){
         const newEvent = new MouseMoveEvent(e)
-        
         this.listEntities.forEach(e=>{
             e.callEvent(newEvent)
         })   
     }
+    fillBg(){
+        this.ctx.fillStyle = window.getComputedStyle(document.body).getPropertyValue("--grass")
+        this.ctx.fillRect(0,0,this.canvas.width,this.canvas.height)
+    }
     update(){
+        this.fillBg()
         this.listEntities.forEach(entity=>{
             entity.update()   
         })

@@ -6,9 +6,9 @@ export class Entity{
         this.name = name
         this.desc = desc
         this.runtime = runtime
-        this.runtime.addEntity(this)
         this.uid = this.generateUid() 
         this.components = components
+        this.runtime.addEntity(this)
     }
     getUid(){
         return this.uid
@@ -45,8 +45,13 @@ export class Entity{
         }
         return true
     }
+    getContext(){
+        return this.runtime.getContext()
+    }
     update(){
-
+        this.getComponents().forEach(e=>{
+            e.update()
+        })
     }
     getComponent(compName){
         const comp = this.getComponents().filter(e=>e.getName()==compName)[0]

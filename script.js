@@ -1,5 +1,5 @@
 'use strict'
-import { Player } from "./Entities/Player.js"
+import { Player } from "./Prototype/NPC/Player/Player.js"
 import { Runtime } from "./Runtime.js"
 const canvas = document.querySelector(".canvas")
 console.log("start")
