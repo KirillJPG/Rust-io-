@@ -66,6 +66,9 @@ export class Entity{
         const comp = this.getComponents().filter(e=>e.getName()==compName)[0]
         return comp
     }
+    sendEvent(event){
+        this.runtime.sendEvent(event)
+    }
     callEvent(event){
         if (this.getListenEvents().includes(event.getName())){
             this.getComponents().forEach(e=>{

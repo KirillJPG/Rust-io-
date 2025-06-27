@@ -1,10 +1,14 @@
 import {Entity} from "../../Entity.js"
 import {TransformComponent} from "../../Components/TransformComponent.js"
 import { WallSpriteComponent } from "./WallSpriteComponent.js"
+import { CollisionComponent } from "../../Components/CollisionComponent.js"
+import { PhysicsComponent } from "../../Components/PhysicsComponent.js"
 export class Wall extends Entity{
-    constructor(runtime){
+    constructor(runtime,x=0,y=0,w=0,h=0,rotate=0){
         super("wall","wall",runtime,[])
-        this.addComponent(new TransformComponent(this,0,0,100,100))
+        this.addComponent(new TransformComponent(this,x,y,w,h,rotate))
         this.addComponent(new WallSpriteComponent(this))
+        this.addComponent(new CollisionComponent(this))
+        this.addComponent(new PhysicsComponent(this,"dynamic",1))
     }
 }

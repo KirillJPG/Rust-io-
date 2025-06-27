@@ -19,6 +19,9 @@ export class Component{
             this.entity.addListenEvent(e)
         }) 
     }
+    sendEvent(event){
+        this.getEntity().sendEvent(event)
+    }
     getContext(){
         if (!this.entity.getContext()) return null
         return this.entity.getContext() 

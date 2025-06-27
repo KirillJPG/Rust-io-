@@ -1,10 +1,11 @@
 import { Component } from "../Component.js";
 import { KeyEvent } from "../Events/KeyEvent.js";
 import { KeyUpEvent } from "../Events/KeyUpEvent.js";
-import { TransformComponent } from "./TransformComponent.js";
+import { Vector } from "../Lib/Vector2.js";
+import { PhysicsComponent } from "./PhysicsComponent.js";
 
 export class MoveControlComponent extends Component{
-    speed = 1000
+    speed = 12000 // 12km/h
     moveX = 0
     moveY = 0
     constructor(entity){
@@ -15,17 +16,17 @@ export class MoveControlComponent extends Component{
     }
     onKeyUp(event){
         const key = event.getEvent().key
-        if (key == "w") this.setY(0)  
-        if (key == "s") this.setY(0)  
-        if (key == "a") this.setX(0)  
-        if (key == "d") this.setX(0) 
+        if (key == "w" || key == "ц") this.setY(0)  
+        if (key == "s" || key == "ы") this.setY(0)  
+        if (key == "a" || key == "ф") this.setX(0)  
+        if (key == "d" || key == "в") this.setX(0) 
     }
     onKeyDown(event){
         const key = event.getEvent().key
-        if (key == "w") this.setY(-1)  
-        if (key == "s") this.setY(1)  
-        if (key == "a") this.setX(-1)  
-        if (key == "d") this.setX(1)  
+        if (key == "w" || key == "ц") this.setY(-1)  
+        if (key == "s" || key == "ы") this.setY(1)  
+        if (key == "a" || key == "ф") this.setX(-1)  
+        if (key == "d" || key == "в") this.setX(1)  
     }
     setY(y) {
         this.moveY = y
@@ -33,11 +34,10 @@ export class MoveControlComponent extends Component{
     setX(x) {
         this.moveX = x
     }
+    
     move(){
-        const transform = this.getEntity().getComponent(new TransformComponent().getName())
-        const {x,y} = transform.getPosition()
-        transform.setX(x+(this.moveX*(this.speed/1000)))
-        transform.setY(y+(this.moveY*(this.speed/1000)))
+        const phys = this.getEntity().getComponent(new PhysicsComponent().getName())
+        phys.setVelocity(new Vector(this.moveX*this.speed/1000,this.moveY*this.speed/1000))
     }
     update(){
         this.move()

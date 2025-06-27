@@ -1,15 +1,16 @@
 import { Component } from "../Component.js";
 import { KeyEvent } from "../Events/KeyEvent.js"
+import {Vector} from "../Lib/Vector2.js"
+
 export class TransformComponent extends Component{
-    x = 0
-    y = 0
+    position = new Vector()
     w = 30
     h = 30
     rotate = 0
-    constructor(entity,x=0,y=0,h=0,w=0){
+    constructor(entity,x=0,y=0,h=0,w=0,rotate=0){
         super("Transform",entity)
-        this.x = x
-        this.y = y
+        this.rotate = rotate
+        this.position = new Vector(x,y)
         this.w = w
         this.h = h
     }
@@ -21,9 +22,7 @@ export class TransformComponent extends Component{
         return this.rotate
     }
     getPosition(){
-        const x = this.x
-        const y = this.y
-        return {x,y}
+        return this.position
     }
     getSize(){
         const w = this.w
@@ -31,9 +30,9 @@ export class TransformComponent extends Component{
         return {w,h}
     }
     setY(y){
-        this.y = y
+        this.position.y = y
     }
     setX(x){
-        this.x = x
+        this.position.x = x
     }
 }

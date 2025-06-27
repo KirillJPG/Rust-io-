@@ -24,7 +24,7 @@ export class CameraPlayerComponent extends Component{
         const height = this.getContext().canvas.height
         const {w:widthPlayer,h:heightPlayer} = transform.getSize() 
         const {x,y} = transform.getPosition() 
-        this.setX(x-width/2-widthPlayer/2)
-        this.setY(y-height/2-heightPlayer/2)
+        this.setX(x-width/2+widthPlayer/2)
+        this.setY(y-height/2+heightPlayer/2)
     }
 }

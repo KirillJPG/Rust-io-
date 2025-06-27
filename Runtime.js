@@ -38,20 +38,19 @@ export class Runtime{
     }
     onClick(e){
         const newEvent = new ClickEvent(e)
-        this.listEntities.forEach(e=>{
-            e.callEvent(newEvent)
-        })
+        this.sendEvent(newEvent) 
     }
     onKeyUp(e){
         const newEvent = new KeyUpEvent(e)
-        this.listEntities.forEach(e=>{
-            e.callEvent(newEvent)
-        })
+        this.sendEvent(newEvent) 
     }
     onKey(e){
         const newEvent = new KeyEvent(e)
+        this.sendEvent(newEvent) 
+    }
+    sendEvent(event){
         this.listEntities.forEach(e=>{
-            e.callEvent(newEvent)
+            e.callEvent(event)
         })
     }
     getContext(){
@@ -59,9 +58,7 @@ export class Runtime{
     }
     onMouseMove(e){
         const newEvent = new MouseMoveEvent(e)
-        this.listEntities.forEach(e=>{
-            e.callEvent(newEvent)
-        })   
+        this.sendEvent(newEvent) 
     }
     fillBg(){
         this.ctx.fillStyle = window.getComputedStyle(document.body).getPropertyValue("--grass")
@@ -73,5 +70,5 @@ export class Runtime{
             entity.update()   
         })
     }
-
+    
 }

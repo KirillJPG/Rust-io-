@@ -5,16 +5,15 @@ export class SpriteComponent extends Component{
     constructor(entity){
         super("Sprite",entity)
     }
-    draw(x,y,w,h){
+    draw(x,y,w,h,rotate){
     }
     update(){
-        console.log(this.entity)
         const transform = this.entity.getComponent(new TransformComponent().getName())
         const camera = this.getCamera()
         const {x:xCamera,y:yCamera} = camera.getPosition()
         const {x,y} = transform.getPosition()
         const {w,h} = transform.getSize()
-        this.draw(x-xCamera,y-yCamera,w,h)
+        const rotate = transform.getRotate()
+        this.draw(x-xCamera,y-yCamera,w,h,rotate)
     }
-    
 }
