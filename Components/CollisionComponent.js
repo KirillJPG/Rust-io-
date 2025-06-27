@@ -51,22 +51,22 @@ export class CollisionComponent extends Component{
             points.reduce((pv,v)=>{
                 DrawLine(this.getContext(),this.getCamera(),pv,v)
                 if (checker(pv,v)){
-                    this.sendCollideEvent(data)
+                    this.sendCollideEvent(data,{point1:pv,point2:v})
                 }
                 return v
             })
         }
     }
-    sendCollideEvent(event){
+    sendCollideEvent(event,side){
         const entity1 = event.component.getEntity() 
-        const eventData = {entity1,entity2:this.getEntity()}
+        const eventData = {entity1,entity2:this.getEntity(),side}
         const newEvent = new CollideEvent(eventData)
         this.sendEvent(newEvent)
     }
     draw(x,y,w,h,rotate){
         const points = GetPointsRect(x,y,w,h,rotate)
         points.reduce((pv,v)=>{
-            DrawLine(this.getContext(),this.getCamera(),pv,v)
+            DrawLine(this.getContext(),this.getCamera(),pv,v,rotate)
             return v
         })
     }

@@ -6,9 +6,9 @@ export function DrawCircle(ctx,camera,x,y){
     ctx.fill()
     ctx.closePath()
 }
-export function DrawLine(ctx,camera,point1,point2){
+export function DrawLine(ctx,camera,point1,point2,rotate){
     ctx.strokeStyle = "red"
-    ctx.lineWidth = 5
+    ctx.lineWidth = 2
     const {x:xCam,y:yCam} = camera.getPosition() 
     if (!point1) return;
     const {x,y} = point1

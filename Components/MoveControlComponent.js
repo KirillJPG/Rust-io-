@@ -1,15 +1,19 @@
 import { Component } from "../Component.js";
+import { CollideEvent } from "../Events/CollideEvent.js";
 import { KeyEvent } from "../Events/KeyEvent.js";
 import { KeyUpEvent } from "../Events/KeyUpEvent.js";
+import { MoveEvent } from "../Events/MoveEvent.js";
 import { Vector } from "../Lib/Vector2.js";
 import { PhysicsComponent } from "./PhysicsComponent.js";
+import { TransformComponent } from "./TransformComponent.js";
 
 export class MoveControlComponent extends Component{
-    speed = 12000 // 12km/h
+    speed = 1000 // 1km/h
     moveX = 0
     moveY = 0
-    constructor(entity){
+    constructor(entity,speed=1000){
         super("MoveControl",entity)
+        this.speed = speed
         this.listenEvents[new KeyEvent().getName()] = (event) =>this.onKeyDown(event)
         this.listenEvents[new KeyUpEvent().getName()] = (event) =>this.onKeyUp(event)
         this.addListensEntity()
@@ -37,7 +41,14 @@ export class MoveControlComponent extends Component{
     
     move(){
         const phys = this.getEntity().getComponent(new PhysicsComponent().getName())
+        const transform = this.getEntity().getComponent(new TransformComponent().getName())
+        const {x,y} = transform.getPosition()
+        const {w,h} = transform.getSize()
+        const rotate = transform.getRotate()
         phys.setVelocity(new Vector(this.moveX*this.speed/1000,this.moveY*this.speed/1000))
+        const eventData = {newPosX:x,newPosY:y,w,h,rotate,component:this}
+        const event = new MoveEvent(eventData)
+        this.sendEvent(event)
     }
     update(){
         this.move()

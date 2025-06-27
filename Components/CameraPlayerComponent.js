@@ -1,21 +1,20 @@
 import { Component } from "../Component.js";
+import { Vector } from "../Lib/Vector2.js";
 import { TransformComponent} from "./TransformComponent.js"
 export class CameraPlayerComponent extends Component{
-    x=0
-    y=0
+    position = new Vector(0,0)
     constructor(entity){
         super("CameraPlayer",entity)
         this.setCamera(this)
     }
     setX(x){
-        this.x=x
+        this.position.x = x
     }
     setY(y){
-        this.y=y
+        this.position.y = y
     }
     getPosition(){
-        const x = this.x
-        const y = this.y
+        const {x,y} = this.position.getPos()
         return {x,y}
     }
     update(){
