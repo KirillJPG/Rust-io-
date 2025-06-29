@@ -16,7 +16,7 @@ export function CheckCollidePointCircle(x,y,radius){
         const {x:x2,y:y2} = point
         const dx = x-x2
         const dy = y-y2
-        const distance = Math.sqrt(dx*dx+dy*dy)  
+        const distance = Math.hypot(dx,dy)
         if (distance < radius) {
             return true
         }
@@ -27,7 +27,7 @@ export function CheckCollideCircleCircle(x,y,radius){
     return (x2,y2,radius2)=>{
         const dx = x-x2
         const dy = y-y2
-        const distance = Math.sqrt(dx*dx+dy*dy) 
+        const distance = Math.hypot(dx,dy)
         if (distance < (radius2+radius)) return true
         else return false
     }

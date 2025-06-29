@@ -18,14 +18,14 @@ export class SpritePlayer extends SpriteComponent{
             ctx.fillStyle="black"
             ctx.lineTo(100,0)
             ctx.stroke()
-            ctx.fillText("player",0,0)
         }else{
             ctx.arc(x,y,w/2,0,Math.PI*2)
             ctx.fill()
-            ctx.fillStyle="black"
-            ctx.fillText("player",x,y)
         }
         ctx.closePath()
         ctx.restore()
+        ctx.fillStyle="black"
+        const text = this.getCamera().getPosition().x
+        ctx.fillText(text,x,y)
     }
 }

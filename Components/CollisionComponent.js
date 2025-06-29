@@ -48,9 +48,11 @@ export class CollisionComponent extends Component{
         if (type == "rect"){
             const points = GetPointsRect(x,y,w,h,rotate)
             const checker = CheckCollideCircleLine(data.newPosX,data.newPosY,data.w/2)
+            const checker2 = CheckCollidePointCircle(data.newPosX,data.newPosY,data.w/2)
             points.reduce((pv,v)=>{
+
                 DrawLine(this.getContext(),this.getCamera(),pv,v)
-                if (checker(pv,v)){
+                if (checker(pv,v) ||checker2(pv) || checker2(v)){
                     this.sendCollideEvent(data,{point1:pv,point2:v})
                 }
                 return v
