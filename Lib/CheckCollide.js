@@ -3,11 +3,16 @@ import { GetRad } from "./GetRad.js"
 
 export function CheckCollidePointRect(x,y,w,h,rotate){
     return (point)=>{
-        const {x:px,y:py} = point
-        const [p1,p2,p3,p4] = GetPointsRect(x,y,w,h,rotate)
-        if (p1.x < px && p1.y > py && p2.x > px && p2.y > py && p3.x < px && p3.y < py && p4.x > px && p4.y < py){
+        const {x:px,y:py}=point
+        const cos = Math.cos(GetRad(rotate))
+        const sin = Math.sin(GetRad(rotate))
+        const x_translated = px - (x+w/2)
+        const y_translated = py - (y+h/2)
+        const x_rotated = rotate ? x_translated * cos + y_translated*sin : px
+        const y_rotated = rotate ? -x_translated * sin + y_translated*cos : py
+        if (x<x_rotated && x+w>x_rotated && y< y_rotated && y+h>y_rotated){
             return true
-        } 
+        }
         return false
     } 
 }

@@ -9,6 +9,6 @@ export class Wall extends Entity{
         this.addComponent(new TransformComponent(this,x,y,w,h,rotate))
         this.addComponent(new WallSpriteComponent(this))
         this.addComponent(new CollisionComponent(this))
-        this.addComponent(new PhysicsComponent(this,"dynamic",1))
+        this.addComponent(new PhysicsComponent(this,"dynamic",100000))
     }
 }

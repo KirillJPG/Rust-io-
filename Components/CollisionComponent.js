@@ -46,22 +46,39 @@ export class CollisionComponent extends Component{
         const rotate = transform.getRotate()
         const {w,h} = transform.getSize()
         if (type == "rect"){
-            const points = GetPointsRect(x,y,w,h,rotate)
-            const checker = CheckCollideCircleLine(data.newPosX,data.newPosY,data.w/2)
-            const checker2 = CheckCollidePointCircle(data.newPosX,data.newPosY,data.w/2)
-            points.reduce((pv,v)=>{
-
-                DrawLine(this.getContext(),this.getCamera(),pv,v)
-                if (checker(pv,v) ||checker2(pv) || checker2(v)){
-                    this.sendCollideEvent(data,{point1:pv,point2:v})
-                }
-                return v
-            })
+            const points = this.CheckCollideRectCircle(x,y,w,h,rotate,data.newPosX,data.newPosY,data.w/2)
+            if (points){
+                this.sendCollideEvent(data,points)
+            }
         }
     }
+    CheckCollideRectCircle(x,y,w,h,rotate,cx,cy,radius){
+        const points = GetPointsRect(x,y,w,h,rotate)
+        const checker = CheckCollideCircleLine(cx,cy,radius)
+        const checker2 = CheckCollidePointCircle(cx,cy,radius)
+        const checker3 = CheckCollidePointRect(x,y,w,h,rotate)
+        let result
+        if (checker3({x:cx,y:cy})){
+            result = {point1:{x:cx,y:cy},point2:{x:x+w/2,y:y+h/2}}
+        }
+        points.reduce((pv,v)=>{
+            DrawLine(this.getContext(),this.getCamera(),pv,v)
+            if (checker(pv,v) ||checker2(pv) || checker2(v)){
+                result = {point1:pv,point2:v}
+            }
+            return v
+        })
+        return result
+    }
+    CheckCollideRectRect(x,y,w,h,rotate,x2,y2,w2,h2,radius2){
+
+    }
+    CheckCollideCircleCircle(cx,cy,radius,cx2,cy2,radius2){
+
+    }
     sendCollideEvent(event,side){
-        const entity1 = event.component.getEntity() 
-        const eventData = {entity1,entity2:this.getEntity(),side}
+        const other = event.component.getEntity() 
+        const eventData = {other,our:this.getEntity(),side}
         const newEvent = new CollideEvent(eventData)
         this.sendEvent(newEvent)
     }
