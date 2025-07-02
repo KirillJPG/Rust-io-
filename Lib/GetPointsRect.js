@@ -1,4 +1,5 @@
 import {GetRad} from "./GetRad.js"
+import { Vector } from "./Vector2.js"
 export function GetPointsRect(x,y,w,h,rotate){
     const rad = GetRad(rotate)
     const cos = Math.cos(rad)
@@ -7,10 +8,7 @@ export function GetPointsRect(x,y,w,h,rotate){
     const rotatedPoints = pointsNoRotate.map(e=>{
         const rotatedX = e.x*cos - e.y*sin
         const rotatedY = e.x*sin + e.y*cos
-        return {
-            x:rotatedX,
-            y:rotatedY
-        }
+        return new Vector(rotatedX,rotatedY)
     })
     return rotatedPoints
 }

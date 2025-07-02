@@ -1,11 +1,12 @@
 import { GetRad } from "./GetRad.js                                                                 "
 
-export function DrawCircle(ctx,camera,x,y){
-    ctx.fillStyle = "red"
+export function DrawCircle(ctx,camera,x,y,radius=5){
+    ctx.strokeStyle = "red"
+    ctx.lineWidth = 2
     const {x:xCam,y:yCam} = camera.getPosition() 
     ctx.beginPath()
-    ctx.arc(x-xCam,y-yCam,5,0,Math.PI*2)
-    ctx.fill()
+    ctx.arc(x-xCam,y-yCam,radius,0,Math.PI*2)
+    ctx.stroke()
     ctx.closePath()
 }
 export function DrawLine(ctx,camera,point1,point2,rotate){

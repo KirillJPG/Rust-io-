@@ -46,8 +46,8 @@ export class MoveControlComponent extends Component{
         const {w,h} = transform.getSize()
         const {x:vx,y:vy} = phys.getVelocity()
         const rotate = transform.getRotate()
-        if (Math.abs(this.speed - Math.abs(vx)) > this.speed || Math.abs(this.speed - Math.abs(vy)) > this.speed) {
-            console.log(vx,vy)
+        const moveSpeed = Math.abs(vx)+Math.abs(vy)
+        if (moveSpeed > this.speed) {
             return
         }
         phys.setVelocity(new Vector(this.moveX*this.speed/1000,this.moveY*this.speed/1000))

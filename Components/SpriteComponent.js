@@ -1,4 +1,5 @@
 import { Component } from "../Component.js";
+import { GetRad } from "../Lib/GetRad.js";
 import { TransformComponent } from "./TransformComponent.js";
 
 export class SpriteComponent extends Component{
@@ -7,6 +8,7 @@ export class SpriteComponent extends Component{
     }
     draw(x,y,w,h,rotate){
     }
+
     update(){
         const transform = this.entity.getComponent(new TransformComponent().getName())
         const camera = this.getCamera()
@@ -14,6 +16,8 @@ export class SpriteComponent extends Component{
         const {x,y} = transform.getPosition()
         const {w,h} = transform.getSize()
         const rotate = transform.getRotate()
-        this.draw(x-xCamera,y-yCamera,w,h,rotate)
+        const xDraw = x-xCamera
+        const yDraw = y-yCamera
+        this.draw(xDraw,yDraw,w,h,rotate)
     }
 }
