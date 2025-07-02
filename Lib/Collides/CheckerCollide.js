@@ -9,7 +9,7 @@ export class CheckerCollide{
     calculateNormal(vec1,vec2,reverce=true){
         const distance = vec1.minus(vec2)
         const normalize = distance.getNormalization()
-        return reverce ?  new Vector(normalize.y,-normalize.x) : new Vector(-normalize.y,normalize.x) 
+        return reverce ?  new Vector(normalize.x,normalize.y) : new Vector(normalize.x,normalize.y) 
     }
     getNormal(){
         return this.normal

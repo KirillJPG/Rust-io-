@@ -42,7 +42,7 @@ export class PhysicsComponent extends Component{
         const velAlongNormal = relative.x * normal.x + relative.y * normal.y
         if (velAlongNormal >0) return
    
-        const j = (-(1+0.5) * velAlongNormal) / ( 1/ mass1 + 1/mass2)
+        const j = (-(1+0) * velAlongNormal) / ( 1/ mass1 + 1/mass2)
         const impulse = new Vector(j*normal.x,j*normal.y)
 
         const newVX2 = 1/mass2 * impulse.x

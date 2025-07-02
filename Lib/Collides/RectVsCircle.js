@@ -31,6 +31,7 @@ export class RectVsCircle extends CheckerCollide{
                 const first_point = points_test1.points[0]
                 isCollide=true
                 this.addIntersects(points_test1.points)
+                console.log(this.calculateNormal(first_point,vecCircle))
                 this.setNormal(this.calculateNormal(first_point,vecCircle))
             }
             // if (test2(pv) || test2(v)){
