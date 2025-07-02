@@ -20,7 +20,7 @@ export function CheckCollideRectRect(x,y,w,h,rotate){
     }
 }
 export function CheckCollideCircleCircle(vec1,radius){
-    return (vec2,radius)=>{
+    return (vec2,radius2)=>{
         const distance = vec1.getDistance(vec2)
         if (distance < (radius2+radius)) return true
         else return false
@@ -76,7 +76,7 @@ export function IntersectCircleLine(cx,cy,radius){
 
     }
 }
-export function Intersect(line1,line2){ 
+export function IntersectLineLine(line1,line2){ 
     const {point1:p1,point2:p2} = line1
     const {point1:p3,point2:p4} = line2
     if (p1.getDistance(p2)==0 || p3.getDistance(p4) == 0) return false
@@ -87,8 +87,12 @@ export function Intersect(line1,line2){
     let ub = ((p2.x - p1.x) * (p1.y - p3.y) - (p2.y - p1.y) * (p1.x - p3.x)) / denominator
 
     if (ua < 0 || ua > 1 || ub < 0 || ub > 1) return false
+    const x1 = p1.x
+    const y1 = p1.y
+    const x2 = p2.x
+    const y2 = p2.y
     let x = x1 + ua * (x2 - x1)
     let y = y1 + ua * (y2 - y1)
 
-    return {x, y}
+    return new Vector(x,y)
 }

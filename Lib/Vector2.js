@@ -11,8 +11,9 @@ export class Vector{
         return {x:this.x,y:this.y}
     }
     getDistance(Vec2){
-        const dx = this.x-Vec2.x
-        const dy = this.y-Vec2.y
+        const {x:x2,y:y2} = Vec2.getPos()
+        const dx = this.x-x2
+        const dy = this.y-y2
         return Math.sqrt(dx*dx+dy*dy)
     }
     getLength(){
@@ -22,10 +23,12 @@ export class Vector{
         return new Vector(this.x/this.getLength(),this.y/this.getLength())
     }
     minus(vec2){
-        return new Vector(this.x-vec2.x,this.y-vec2.y)
+        const {x:x2,y:y2} = vec2.getPos()
+        return new Vector(this.x-x2,this.y-y2)
     }
     plus(vec2){
-        return new Vector(this.x+vec2.x,this.y+vec2.y)
+        const {x:x2,y:y2} = vec2.getPos()
+        return new Vector(this.x+x2,this.y+y2)
     }
     getRotate(deg){
         const rotate = GetRad(deg)

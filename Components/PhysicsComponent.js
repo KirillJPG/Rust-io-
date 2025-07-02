@@ -10,9 +10,11 @@ export class PhysicsComponent extends Component{
     mass = 1
     velocity = new Vector(0,0)
     angularVelocity = 0
-    constructor(entity,type = "static",mass = 1){
+    friction = 0.99
+    constructor(entity,type = "static",mass = 1,friction = 0.99){
         super("Physics",entity)
         this.type = type
+        this.friction = friction
         this.mass = mass
         this.listenEvents[new CollideEvent().getName()] = (event)=>this.onCollide(event)
         this.addListensEntity()
@@ -42,7 +44,7 @@ export class PhysicsComponent extends Component{
         const velAlongNormal = relative.x * normal.x + relative.y * normal.y
         if (velAlongNormal >0) return
    
-        const j = (-(1+0) * velAlongNormal) / ( 1/ mass1 + 1/mass2)
+        const j = (-(1+0.5) * velAlongNormal) / ( 1/ mass1 + 1/mass2)
         const impulse = new Vector(j*normal.x,j*normal.y)
 
         const newVX2 = 1/mass2 * impulse.x
@@ -58,15 +60,14 @@ export class PhysicsComponent extends Component{
     }
     push(){
         const {x,y} = this.getVelocity()
-        const friction = 0.99
         const transform = this.getEntity().getComponent(new TransformComponent().getName())
         const {x:oldX,y:oldY} = transform.getPosition()
         const rotate = transform.getRotate()
         transform.setX(oldX+(x))
         transform.setY(oldY+(y))
         transform.setRotate(this.getAngularVel()+rotate)
-        this.setAngularVel(this.getAngularVel()*friction)
-        this.setVelocity(new Vector(x*friction,y*friction))
+        this.setAngularVel(this.getAngularVel()*this.friction)
+        this.setVelocity(new Vector(x*this.friction,y*this.friction))
         if (x||y){
             const {w,h}= transform.getSize()
             const {x:newPosX,y:newPosY} = transform.getPosition()
@@ -75,13 +76,13 @@ export class PhysicsComponent extends Component{
             this.sendEvent(event)
         } 
         if (Math.abs(x) < 0.01 ){
-            this.setVelocity(new Vector(0,y*friction))
+            this.setVelocity(new Vector(0,y*this.friction))
         }
         if (Math.abs(this.getAngularVel()) < 0.1){
             this.setAngularVel(0)
         }
         if (Math.abs(y) < 0.01){
-            this.setVelocity(new Vector(x*friction,0))
+            this.setVelocity(new Vector(x*this.friction,0))
         }
 
     }

@@ -22,7 +22,6 @@ export class RectVsCircle extends CheckerCollide{
         const vecCircle = new Vector(pos2.x,pos2.y)
         const centerRect = new Vector(pos1.x+w1/2,pos1.y+h1/2)
         const test1 = IntersectCircleLine(pos2.x,pos2.y,diameter/2)
-        const test2 = CheckCollidePointCircle(vecCircle,diameter/2)
         const points = GetPointsRect(pos1.x,pos1.y,w1,h1,0)
         let isCollide = false
         points.reduce((pv,v)=>{
@@ -31,13 +30,8 @@ export class RectVsCircle extends CheckerCollide{
                 const first_point = points_test1.points[0]
                 isCollide=true
                 this.addIntersects(points_test1.points)
-                console.log(this.calculateNormal(first_point,vecCircle))
                 this.setNormal(this.calculateNormal(first_point,vecCircle))
             }
-            // if (test2(pv) || test2(v)){
-            //     isCollide=true
-            //     this.setNormal(this.calculateNormal(pv,vecCircle))
-            // }
             return v
         })
         if (isCollide) return isCollide

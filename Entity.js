@@ -2,7 +2,7 @@ import {Random} from "./Lib/Random.js"
 export class Entity{
     components = []
     listenEvents = []
-    constructor(name,desc,runtime,components){
+    constructor(name,desc,runtime,components = []){
         this.name = name
         this.desc = desc
         this.runtime = runtime
