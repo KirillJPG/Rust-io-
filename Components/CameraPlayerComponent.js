@@ -14,8 +14,7 @@ export class CameraPlayerComponent extends Component{
         this.position.y = y
     }
     getPosition(){
-        const {x,y} = this.position.getPos()
-        return {x,y}
+        return this.position
     }
     update(){
         const transform = this.getEntity().getComponent(new TransformComponent().getName())

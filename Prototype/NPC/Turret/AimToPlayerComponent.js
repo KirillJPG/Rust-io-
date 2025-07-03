@@ -1,5 +1,6 @@
 import { Component } from "../../../Component.js";
 import { TransformComponent } from "../../../Components/TransformComponent.js";
+import { CalculateRotating } from "../../../Lib/CalculateRotating.js";
 import { Vector } from "../../../Lib/Vector2.js";
 import { EntitiesManager } from "../../../Managers/EntitiesManager.js";
 
@@ -15,7 +16,14 @@ export class AimToPlayer extends Component{
         const {w,h} = transform.getSize()
         const center = new Vector(pos.x+w/2,pos.y+h/2) 
         const allPlayers = this.eManager.getEntitiesByRange(center,"player",500)
-        console.log(allPlayers)
+        if (!allPlayers.length) return;
+        const firstPlayerTransform = allPlayers[0].getComponent(new TransformComponent().getName())
+        const cameraPos = this.getCamera().getPosition()
+        const posPlayer = firstPlayerTransform.getPosition().minus(cameraPos)
+        
+        const rotate = CalculateRotating(center.minus(cameraPos),posPlayer)+(3.14*180/Math.PI)/2
+        console.log(rotate)
+        transform.setRotate(rotate)
     }
     update(){
         this.aiming()

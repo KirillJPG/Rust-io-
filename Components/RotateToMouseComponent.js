@@ -19,7 +19,7 @@ export class RotateToMouseComponent extends Component{
         const {x:xPlayer,y:yPlayer} = transform.getPosition()
         const mouseVec = new Vector(data.clientX,data.clientY)
         const playerVec = new Vector(xPlayer-xCamera,yPlayer-yCamera)
-        const rotate = CalculateRotating(playerVec,mouseVec)
+        const rotate = CalculateRotating(playerVec,mouseVec)+(3.14*180/Math.PI)
         transform.setRotate(rotate)
     }
 }
