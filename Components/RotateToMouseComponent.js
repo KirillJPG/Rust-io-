@@ -1,6 +1,8 @@
 import { Component } from "../Component.js";
 import { TransformComponent } from "./TransformComponent.js";
 import {MouseMoveEvent} from "../Events/MouseMoveEvent.js"
+import { Vector } from "../Lib/Vector2.js";
+import { CalculateRotating } from "../Lib/CalculateRotating.js";
 export class RotateToMouseComponent extends Component{
     constructor(entity){
         super("RotateToMouse",entity)
@@ -9,17 +11,15 @@ export class RotateToMouseComponent extends Component{
         }
         this.addListensEntity()
     }
+
     onMouseMove(event){
         const data = event.getEvent()
         const {x:xCamera,y:yCamera} = this.getCamera().getPosition()
         const transform = this.getEntity().getComponent(new TransformComponent().getName())
         const {x:xPlayer,y:yPlayer} = transform.getPosition()
-        const x = data.clientX
-        const y = data.clientY
-        const dx = xPlayer-xCamera-x
-        const dy = yPlayer-yCamera-y
-        const rotate = Math.atan2(dy,dx)* (180/Math.PI)+(3.14*180/Math.PI)
+        const mouseVec = new Vector(data.clientX,data.clientY)
+        const playerVec = new Vector(xPlayer-xCamera,yPlayer-yCamera)
+        const rotate = CalculateRotating(playerVec,mouseVec)
         transform.setRotate(rotate)
-
     }
 }
