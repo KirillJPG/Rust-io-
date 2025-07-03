@@ -27,14 +27,13 @@ export class RectVsCircle extends CheckerCollide{
         points.reduce((pv,v)=>{
             const points_test1 = test1(pv,v)
             if (points_test1){
-                const first_point = points_test1.points[0]
                 isCollide=true
                 this.addIntersects(points_test1.points)
-                this.setNormal(this.calculateNormal(first_point,vecCircle))
             }
             return v
         })
-        if (isCollide) return isCollide
+        let min_point = this.getMinDistanceIntersects(vecCircle)
+        if ( min_point ) this.setNormal(this.calculateNormal(min_point,vecCircle))
         return isCollide
     }
     

@@ -33,7 +33,7 @@ export class MoveControlComponent extends Component{
         if (key == "d" || key == "в") this.setX(1)  
     }
     setY(y) {
-        this.moveY = y
+            this.moveY = y
     }
     setX(x) {
         this.moveX = x

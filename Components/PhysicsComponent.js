@@ -14,12 +14,17 @@ export class PhysicsComponent extends Component{
     constructor(entity,type = "static",mass = 1,friction = 0.99){
         super("Physics",entity)
         this.type = type
-        this.friction = friction
+        this.friction = Math.min(friction,1)
         this.mass = mass
         this.listenEvents[new CollideEvent().getName()] = (event)=>this.onCollide(event)
         this.addListensEntity()
     }
     setVelocity(velocity){
+        if (velocity.x||velocity.y){
+            if ( this.getEntity().name =="ball"){
+                console.log(velocity)
+            }
+        }
         this.velocity = new Vector(velocity.x,velocity.y)
     }
     getVelocity(){
@@ -27,6 +32,16 @@ export class PhysicsComponent extends Component{
     }
     getMass(){
         return this.mass
+    }
+    pushFriction(){
+        const {x,y} = this.getVelocity()
+        const newX = Math.abs(x*this.friction) < 0.1 ? 0 : x*this.friction 
+        const newY = Math.abs(y*this.friction) < 0.1 ? 0 : y*this.friction
+
+        if (newX || newY){
+            this.setVelocity(new Vector(newX,newY))
+        }
+
     }
     onCollide(event){
         const {other,our,normal} = event.getEvent()
@@ -38,19 +53,19 @@ export class PhysicsComponent extends Component{
         const mass2 = physOur.getMass() 
         
         const relative = {
-            x:vx2-vx1,
+            x:vx2-vx1 ,
             y: vy2-vy1
         }
         const velAlongNormal = relative.x * normal.x + relative.y * normal.y
         if (velAlongNormal >0) return
    
-        const j = (-(1+0.5) * velAlongNormal) / ( 1/ mass1 + 1/mass2)
+        const j = (-(1+0.5) * velAlongNormal) / (1 / mass1 + 1/mass2)
         const impulse = new Vector(j*normal.x,j*normal.y)
 
         const newVX2 = 1/mass2 * impulse.x
         const newVY2 = 1/mass2 * impulse.y
-        const newVX = -(1/mass1*impulse.x) 
-        const newVY = -(1/mass1*impulse.y)
+        const newVX = -1/mass1*impulse.x
+        const newVY = -1/mass1*impulse.y
         
         physOther.setVelocity(new Vector(newVX,newVY))
         if (physOur.getType() != "static"){
@@ -63,27 +78,23 @@ export class PhysicsComponent extends Component{
         const transform = this.getEntity().getComponent(new TransformComponent().getName())
         const {x:oldX,y:oldY} = transform.getPosition()
         const rotate = transform.getRotate()
+        if (this.getEntity().name =="ball"){
+            if (x&&y){
+                console.log(x,y) 
+            } 
+        }
+        this.pushFriction()
         transform.setX(oldX+(x))
         transform.setY(oldY+(y))
-        transform.setRotate(this.getAngularVel()+rotate)
-        this.setAngularVel(this.getAngularVel()*this.friction)
-        this.setVelocity(new Vector(x*this.friction,y*this.friction))
-        if (x||y){
+        if (this.getType() != "static"){
+            
             const {w,h}= transform.getSize()
             const {x:newPosX,y:newPosY} = transform.getPosition()
             const eventData = {w,h,rotate,newPosX,newPosY,component:this}
             const event = new MoveEvent(eventData)
             this.sendEvent(event)
         } 
-        if (Math.abs(x) < 0.01 ){
-            this.setVelocity(new Vector(0,y*this.friction))
-        }
-        if (Math.abs(this.getAngularVel()) < 0.1){
-            this.setAngularVel(0)
-        }
-        if (Math.abs(y) < 0.01){
-            this.setVelocity(new Vector(x*this.friction,0))
-        }
+
 
     }
     setAngularVel(angVel){

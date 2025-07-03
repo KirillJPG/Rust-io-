@@ -1,5 +1,5 @@
-import { SpriteComponent } from "../../Components/SpriteComponent.js";
-import {GetRad} from "../../Lib/GetRad.js"
+import { SpriteComponent } from "../../../Components/SpriteComponent.js";
+import {GetRad} from "../../../Lib/GetRad.js"
 export class WallSpriteComponent extends SpriteComponent{
     constructor(entity){
         super(entity)

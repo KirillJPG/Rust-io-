@@ -56,7 +56,7 @@ export class RectVsRect extends CheckerCollide{
             })
             return v
         })
-        if (isCollide) return isCollide
+        
         return isCollide
     }
 }
