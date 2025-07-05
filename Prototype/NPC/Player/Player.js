@@ -11,7 +11,7 @@ export class Player extends Entity{
         super("player","player",runtime,[])
         this.addComponent(new TransformComponent(this,0,0,20,50))
         this.addComponent(new SpritePlayer(this))
-        this.addComponent(new MoveControlComponent(this,2000))
+        this.addComponent(new MoveControlComponent(this,1000))
         this.addComponent(new PhysicsComponent(this,"dynamic",1))
         this.addComponent(new CameraPlayerComponent(this))
         this.addComponent(new CollisionComponent(this,TypeCollider["CIRCLE"]))

@@ -20,4 +20,8 @@ export class EntitiesManager{
         return filteredEntities
 
     }
+    destroyEntity(entity){
+        this.runtime.removeEntity(entity)
+    }
+
 }

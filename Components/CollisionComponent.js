@@ -52,7 +52,7 @@ export class CollisionComponent extends Component{
         const points = checker.getIntersects()
         if (points?.length != 0){
             points.forEach((e)=>{
-                DrawCircle(this.getContext(),this.getCamera(),e.x,e.y   )
+                DrawCircle(this.getContext(),this.getCamera(),e.x,e.y)
             })
         }
         if (isCollide){
@@ -70,11 +70,12 @@ export class CollisionComponent extends Component{
         const transform = this.getEntity().getComponent(new TransformComponent().getName())
         const {x,y} = transform.getPosition()
         const {w,h} = transform.getSize()
+        const rotate = transform.getRotate()
 
         if (this.getType() == TypeCollider["BOX"]){
-            const points = GetPointsRect(x,y,w,h,0)
+            const points = GetPointsRect(x,y,w,h,rotate)    
             points.reduce((pv,v)=>{
-                DrawLine(this.getContext(),this.getCamera(),pv,v,0)
+                DrawLine(this.getContext(),this.getCamera(),pv,v,rotate)
                 DrawCircle(this.getContext(),this.getCamera(),v.x,v.y,5)
                 return v
             })

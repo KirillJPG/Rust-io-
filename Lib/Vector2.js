@@ -35,8 +35,8 @@ export class Vector{
         const cos = Math.cos(rotate)
         const sin = Math.sin(rotate)
 
-        const x = this.x*cos+this.y*sin
-        const y = -this.x*sin+this.y*cos
+        const x = this.x*cos-this.y*sin
+        const y = this.x*sin+this.y*cos
         return new Vector(x,y)
     }
     increase(num){

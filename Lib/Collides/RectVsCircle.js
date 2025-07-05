@@ -1,6 +1,6 @@
 import {CheckerCollide} from "./CheckerCollide.js"
 import {TransformComponent} from "../../Components/TransformComponent.js"
-import { CheckCollidePointCircle, IntersectCircleLine } from "./ChecksCollide.js"
+import { CheckCollidePointCircle, CheckCollideRectRect, IntersectCircleLine } from "./ChecksCollide.js"
 import {GetPointsRect} from "../../Lib/GetPointsRect.js"
 import { Vector } from "../Vector2.js"
 export class RectVsCircle extends CheckerCollide{
@@ -19,11 +19,16 @@ export class RectVsCircle extends CheckerCollide{
         const pos2 = transform2.getPosition()
         const {w:w1,h:h1} = transform1.getSize()
         const {w:diameter} = transform2.getSize()
+        const rotate = transform1.getRotate()
         const vecCircle = new Vector(pos2.x,pos2.y)
-        const centerRect = new Vector(pos1.x+w1/2,pos1.y+h1/2)
         const test1 = IntersectCircleLine(pos2.x,pos2.y,diameter/2)
-        const points = GetPointsRect(pos1.x,pos1.y,w1,h1,0)
+        const test2 = CheckCollideRectRect(pos1.x,pos1.y,w1,h1,rotate)
+        const points = GetPointsRect(pos1.x,pos1.y,w1,h1,rotate)
         let isCollide = false
+        if (test2(pos2.x,pos2.y,1,1,0)){
+            this.addIntersects([pos2])
+            isCollide= true
+        }
         points.reduce((pv,v)=>{
             const points_test1 = test1(pv,v)
             if (points_test1){

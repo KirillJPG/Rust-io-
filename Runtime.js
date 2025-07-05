@@ -33,6 +33,9 @@ export class Runtime{
     getEntities(){
         return this.listEntities
     }
+    removeEntity(entity){
+        this.listEntities = this.listEntities.filter(e=>e!=entity)
+    }
     addEntity(entity){
         this.listEntities.push(entity) 
     }
