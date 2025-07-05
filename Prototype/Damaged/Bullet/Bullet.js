@@ -6,7 +6,7 @@ import { Vector } from "../../../Lib/Vector2.js";
 import { EntitiesManager } from "../../../Managers/EntitiesManager.js";
 import { GunTurret } from "../../NPC/Turret/GunTurret.js";
 import {HitBulletEvent } from "../../../Events/HitBulletEvent.js"
-export class Bullet extends Component{
+export class BulletComponent extends Component{
     constructor(entity,rotateVelocity,gun,damage,speed=3){
         super("bullet",entity)
         this.gun = gun
@@ -27,6 +27,7 @@ export class Bullet extends Component{
         return this.damage
     }
     destroy(){
+        if (!this.getEntity()) return
         this.entManager.destroyEntity(this.getEntity())
     }
     collideEntity(event){
@@ -40,7 +41,6 @@ export class Bullet extends Component{
     sendHitEvent(other){
         const data = {other,our:this.getEntity()}
         const event = new HitBulletEvent(data)
-        console.log(event)
         this.sendEvent(event)
     }
     force(){

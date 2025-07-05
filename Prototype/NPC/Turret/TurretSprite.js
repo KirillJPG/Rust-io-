@@ -1,14 +1,16 @@
 import {SpriteComponent} from "../../../Components/SpriteComponent.js"
 import { GetRad } from "../../../Lib/GetRad.js"
 import { AimToPlayer } from "./AimToPlayerComponent.js"
+import { GunTurret } from "./GunTurret.js"
 export class TurretSprite extends SpriteComponent{
     constructor(entity){
         super(entity)
     }
     draw(x,y,w,h,rotate){
+        const gun = this.getEntity().getComponent(new GunTurret().getName())
+        const {wGun,hGun} =gun.getSize()
         const aimingComp = this.getEntity().getComponent(new AimToPlayer().getName())
-        const wGun = 10
-        const hGun = 60
+
         const ctx = this.getContext()
         ctx.save()
         ctx.fillStyle = window.getComputedStyle(document.body).getPropertyValue("--turret")
