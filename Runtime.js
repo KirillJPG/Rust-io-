@@ -71,8 +71,14 @@ export class Runtime{
         this.sendEvent(newEvent) 
     }
     fillBg(){
-        this.ctx.fillStyle = window.getComputedStyle(document.body).getPropertyValue("--grass")
+        this.ctx.save()
+        const image = new Image()
+        image.src ="/public/textures/dirty.jpg"
+        const pattern = this.ctx.createPattern(image,"repeat")
+        this.ctx.fillStyle = pattern
+        
         this.ctx.fillRect(0,0,this.canvas.width,this.canvas.height)
+        this.ctx.restore()
     }
     update(){
         this.fillBg()
