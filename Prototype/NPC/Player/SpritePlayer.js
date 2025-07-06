@@ -24,8 +24,5 @@ export class SpritePlayer extends SpriteComponent{
         }
         ctx.closePath()
         ctx.restore()
-        ctx.fillStyle="black"
-        const text = this.getCamera().getPosition().x
-        ctx.fillText(text,x,y)
     }
 }
