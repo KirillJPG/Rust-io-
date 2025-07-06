@@ -1,0 +1,6 @@
+
+[![rust](https://yandex.ru/images/search?img_url=https%3A%2F%2Fscontent-hel3-1.cdninstagram.com%2Fv%2Ft51.2885-15%2Fe35%2F149303452_891652468261646_6683724139502811186_n.jpg%3Ftp%3D1%26_nc_ht%3Dscontent-hel3-1.cdninstagram.com%26_nc_cat%3D102%26_nc_ohc%3DYcX0l_rbB8gAX8zRJBe%26edm%3DABfd0MgBAAAA%26ccb%3D7-4%26oh%3D56cd655ea596f6fab47f579f97f2ec3a%26oe%3D60BB2F2B%26_nc_sid%3D7bff83&lr=119126&p=1&pos=6&rpt=simage&source=serp&stype=image&text=rust%20logo "rust")](https://yandex.ru/images/search?img_url=https%3A%2F%2Fscontent-hel3-1.cdninstagram.com%2Fv%2Ft51.2885-15%2Fe35%2F149303452_891652468261646_6683724139502811186_n.jpg%3Ftp%3D1%26_nc_ht%3Dscontent-hel3-1.cdninstagram.com%26_nc_cat%3D102%26_nc_ohc%3DYcX0l_rbB8gAX8zRJBe%26edm%3DABfd0MgBAAAA%26ccb%3D7-4%26oh%3D56cd655ea596f6fab47f579f97f2ec3a%26oe%3D60BB2F2B%26_nc_sid%3D7bff83&lr=119126&p=1&pos=6&rpt=simage&source=serp&stype=image&text=rust%20logo "rust")
+# RUST.IO only on JS
+My attempt to create a game only on js by type Rust.
+
+Rust.io is a browser parody of the popular Survival-game Rust, implemented on pure JavaScript using Entity-Component-System (ECS) of architecture. The project combines the simplified mechanics of the original
