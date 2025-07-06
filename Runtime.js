@@ -73,10 +73,9 @@ export class Runtime{
     fillBg(){
         this.ctx.save()
         const image = new Image()
-        image.src ="/public/textures/dirty.jpg"
+        image.src ="/public/textures/dress/0.png"
         const pattern = this.ctx.createPattern(image,"repeat")
         this.ctx.fillStyle = pattern
-        
         this.ctx.fillRect(0,0,this.canvas.width,this.canvas.height)
         this.ctx.restore()
     }

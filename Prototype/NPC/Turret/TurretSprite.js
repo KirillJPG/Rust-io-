@@ -5,6 +5,8 @@ import { GunTurret } from "./GunTurret.js"
 export class TurretSprite extends SpriteComponent{
     constructor(entity){
         super(entity)
+        this.gunImage = new Image()
+        this.gunImage.src = "../../../public/items/Guns/MP5.png"
     }
     draw(x,y,w,h,rotate){
         const gun = this.getEntity().getComponent(new GunTurret().getName())
@@ -16,14 +18,9 @@ export class TurretSprite extends SpriteComponent{
         ctx.fillStyle = window.getComputedStyle(document.body).getPropertyValue("--turret")
         ctx.fillRect(x,y,w,h)
         ctx.translate(x+w/2,y+h/2)  
-        ctx.rotate(GetRad(aimingComp.getRotateGun()))
-        ctx.fillStyle = window.getComputedStyle(document.body).getPropertyValue("--turretGun")
-        ctx.fillRect(-wGun/2,0,wGun,hGun)
-        ctx.fillStyle = "black"
-        ctx.fillRect(-wGun/2,hGun-4,wGun,1)
-        ctx.fillRect(-wGun/2,hGun-8,wGun,1)
-        ctx.fillRect(-wGun/2,hGun-12,wGun,1)
-        ctx.fillRect(-wGun/2,hGun-16,wGun,1)
+        ctx.rotate(GetRad(aimingComp.getRotateGun()+90))
+        ctx.imageSmoothingEnabled = false;
+        ctx.drawImage(this.gunImage,-wGun/2,-hGun/2,wGun,hGun)
         ctx.restore()
     }
 }

@@ -15,7 +15,6 @@ export class BaseInfoPlayer extends BaseUiElement{
         const progress = (hp/maxHp*100).toFixed(0)+"%"
         const value = style.getPropertyValue("--value")
         this.hpBar.textContent = hp
-        console.log(progress,value)
         if (value == progress) return;
         style.setProperty("--value",progress)
     }
