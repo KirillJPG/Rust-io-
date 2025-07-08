@@ -1,5 +1,6 @@
 import {BaseUiElement} from "../BaseUiElement.js"
 import {TransformComponent} from "../../Components/TransformComponent.js"
+import { OpenDoorEvent } from "../../Prototype/Structures/Door/OpenDoorEvent.js"
 export class DoorMenu extends BaseUiElement{
     constructor(entity){
         super()
@@ -11,7 +12,9 @@ export class DoorMenu extends BaseUiElement{
         document.body.appendChild(this.openButton)
     }
     onOpen(){
-        console.log("open")
+        const data = {door:this.entity}
+        const event = new OpenDoorEvent(data)
+        this.entity.sendEvent(event)
     }
     draw(){
         const vecP = this.entity.getRuntime().getPlayer().getComponent(new TransformComponent().getName()).getPosition()

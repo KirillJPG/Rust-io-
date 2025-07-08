@@ -8,9 +8,12 @@ export class WallSprite extends SpriteComponent{
         this.h = h
         this.col = col
         this.row = row
+        this.imgWall = this.getTextureLvl()
     }
     getTextureLvl(){
-        const lvlWall = this.getEntity().getComponent(new ConstructionLvlComponent().getName()).getLvl()
+        const lvlComp = this.getEntity().getComponent(new ConstructionLvlComponent().getName())
+        if (!lvlComp) return;
+        const lvlWall = lvlComp.getLvl()
         let img = new Image()
         let src = ''
         switch(lvlWall){
@@ -34,15 +37,18 @@ export class WallSprite extends SpriteComponent{
         return img
     }
     draw(x,y,w,h,rotate){
-        const imageWall = this.getTextureLvl()
+        if (!this.imgWall){
+            this.imgWall = this.getTextureLvl()
+            return;
+        }
         const ctx = this.getContext()
         ctx.save()
-        ctx.beginPath()
+        ctx.beginPath() 
         ctx.translate(x,y)
         ctx.imageSmoothingEnabled = false;
         for(let xD=0; xD<this.col;xD++){
             for(let yD=0; yD<this.row;yD++){
-                ctx.drawImage(imageWall,xD*this.w,yD*this.h,this.w,this.h)
+                ctx.drawImage(this.imgWall,xD*this.w,yD*this.h,this.w,this.h)
             }
         }
         ctx.closePath()

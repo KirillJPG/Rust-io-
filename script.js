@@ -11,6 +11,6 @@ const player = new Player(runtime,50,50,true)
 const wall = new Wall(runtime,-50,-50,1,5,0,1)
 const wall2 = new Wall(runtime,150,-50,1,5,0,1)
 const wall3 = new Wall(runtime,-50,-50,5,1,0,1)
-const turret = new Turret(runtime,-450,100)
+// const turret = new Turret(runtime,-550,200)
 const door = new Door(runtime,0,150,0)
 

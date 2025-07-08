@@ -5,6 +5,7 @@ import { UserInterfaceComponent } from "../../../Components/UserInterfaceCompone
 import {Entity} from "../../../Entity.js"
 import { DoorSprite } from "./DoorSprite.js"
 import { DoorMenu } from "../../../UI/DoorMenu/DoorMenu.js"
+import { DoorComponent } from "./DoorComponent.js"
 export class Door extends Entity{
     constructor(runtime,x,y,rotate= 0){
         super("door","door",runtime)
@@ -15,5 +16,6 @@ export class Door extends Entity{
         this.addComponent(new UserInterfaceComponent(this,[
             new DoorMenu(this)
         ]))
+        this.addComponent(new DoorComponent(this))
     }
 }
