@@ -37,7 +37,12 @@ export class PhysicsComponent extends Component{
         const {x,y} = this.getVelocity()
         const newX = Math.abs(x*this.friction) < 0.1 ? 0 : x*this.friction 
         const newY = Math.abs(y*this.friction) < 0.1 ? 0 : y*this.friction
-
+        const angVel = this.getAngularVel()
+        if (Math.abs(angVel) > 0.1 ){
+            this.setAngularVel(angVel*this.friction)
+        }else{
+            this.setAngularVel(0)
+        }
         if (newX || newY){
             this.setVelocity(new Vector(newX,newY))
         }
@@ -75,14 +80,15 @@ export class PhysicsComponent extends Component{
     }
     push(){
         const {x,y} = this.getVelocity()
+        const angVel = this.getAngularVel()
         const transform = this.getEntity().getComponent(new TransformComponent().getName())
         const {x:oldX,y:oldY} = transform.getPosition()
         const rotate = transform.getRotate()
         this.pushFriction()
         transform.setX(oldX+(x))
         transform.setY(oldY+(y))
+        transform.setRotate(rotate+angVel)
         if (this.getType() != "static"){
-            
             const {w,h}= transform.getSize()
             const {x:newPosX,y:newPosY} = transform.getPosition()
             const eventData = {w,h,rotate,newPosX,newPosY,component:this}

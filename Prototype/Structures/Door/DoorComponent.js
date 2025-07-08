@@ -1,6 +1,8 @@
 import { Component } from "../../../Component.js";
 import {OpenDoorEvent} from "./OpenDoorEvent.js"
 import {TransformComponent} from "../../../Components/TransformComponent.js"
+import { PhysicsComponent } from "../../../Components/PhysicsComponent.js";
+import { GetRad } from "../../../Lib/GetRad.js";
 export class DoorComponent extends Component{
     isOpen = false
     constructor(entity){
@@ -14,10 +16,11 @@ export class DoorComponent extends Component{
         const data = event.getEvent()
         if (data.door != this.getEntity()) return
         const transform = this.getEntity().getComponent(new TransformComponent().getName())
+        const phys = this.getEntity().getComponent(new PhysicsComponent().getName())
         if (!this.isOpen){
-            transform.setRotate(90)
+            phys.setAngularVel(GetRad(50))
         }else{
-            transform.setRotate(0)
+            phys.setAngularVel(GetRad(-50))
         }
         this.isOpen  = !this.isOpen
     }

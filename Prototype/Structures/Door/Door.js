@@ -10,7 +10,7 @@ export class Door extends Entity{
     constructor(runtime,x,y,rotate= 0){
         super("door","door",runtime)
         this.addComponent(new TransformComponent(this,x,y,50,150,rotate))
-        this.addComponent(new PhysicsComponent(this,"static",1,0))  
+        this.addComponent(new PhysicsComponent(this,"static",1,0.99))  
         this.addComponent(new DoorSprite(this))
         this.addComponent(new CollisionComponent(this,TypeCollider["BOX"]))
         this.addComponent(new UserInterfaceComponent(this,[
