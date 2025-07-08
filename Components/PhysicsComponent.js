@@ -57,9 +57,9 @@ export class PhysicsComponent extends Component{
             y: vy2-vy1
         }
         const velAlongNormal = relative.x * normal.x + relative.y * normal.y
-        if (velAlongNormal >0) return
+        if (velAlongNormal >-0.1) return
    
-        const j = (-(1+0.5) * velAlongNormal) / (1 / mass1 + 1/mass2)
+        let j = (-(1+1) * velAlongNormal) / (1 / mass1 + 1/mass2)
         const impulse = new Vector(j*normal.x,j*normal.y)
 
         const newVX2 = 1/mass2 * impulse.x
@@ -78,11 +78,6 @@ export class PhysicsComponent extends Component{
         const transform = this.getEntity().getComponent(new TransformComponent().getName())
         const {x:oldX,y:oldY} = transform.getPosition()
         const rotate = transform.getRotate()
-        if (this.getEntity().name =="ball"){
-            if (x&&y){
-                console.log(x,y) 
-            } 
-        }
         this.pushFriction()
         transform.setX(oldX+(x))
         transform.setY(oldY+(y))

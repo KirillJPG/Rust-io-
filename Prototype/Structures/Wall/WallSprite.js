@@ -2,8 +2,12 @@ import { SpriteComponent } from "../../../Components/SpriteComponent.js";
 import {GetRad} from "../../../Lib/GetRad.js"
 import {ConstructionLvlComponent} from "../../../Components/ConstructionLvlComponent.js"
 export class WallSprite extends SpriteComponent{
-    constructor(entity){
+    constructor(entity,col,row,w,h){
         super(entity)
+        this.w = w
+        this.h = h
+        this.col = col
+        this.row = row
     }
     getTextureLvl(){
         const lvlWall = this.getEntity().getComponent(new ConstructionLvlComponent().getName()).getLvl()
@@ -32,19 +36,15 @@ export class WallSprite extends SpriteComponent{
     draw(x,y,w,h,rotate){
         const imageWall = this.getTextureLvl()
         const ctx = this.getContext()
-        const pattern = ctx.createPattern(imageWall,"repeat")
-        ctx.fillStyle = pattern
-        let rad = 0
         ctx.save()
         ctx.beginPath()
-        if (rotate){
-            rad = GetRad(rotate)
-            ctx.translate(x,y)
-            ctx.rotate(rad)
-            ctx.fillRect(0,0,w,h)
-        }else{
-            ctx.fillRect(x,y,w,h)
-        } 
+        ctx.translate(x,y)
+        ctx.imageSmoothingEnabled = false;
+        for(let xD=0; xD<this.col;xD++){
+            for(let yD=0; yD<this.row;yD++){
+                ctx.drawImage(imageWall,xD*this.w,yD*this.h,this.w,this.h)
+            }
+        }
         ctx.closePath()
         ctx.restore()
     }

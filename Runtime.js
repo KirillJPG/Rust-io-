@@ -2,6 +2,7 @@ import {ClickEvent} from "./Events/ClickEvent.js"
 import {KeyEvent} from "./Events/KeyEvent.js"
 import {KeyUpEvent} from "./Events/KeyUpEvent.js"
 import {MouseMoveEvent} from "./Events/MouseMoveEvent.js"
+import {RightClickEvent} from "./Events/RightClickEvent.js"
 
 export class Runtime{
     listEntities = []
@@ -15,6 +16,7 @@ export class Runtime{
         document.addEventListener("keydown",(e)=>this.onKey(e))
         document.addEventListener("keyup",(e)=>this.onKeyUp(e))
         this.canvas.addEventListener("mousemove",(e)=>this.onMouseMove(e))
+        this.canvas.addEventListener("contextmenu",(e)=>this.onRightClick(e))
         setInterval(()=>this.update(),1)
         this.resize()
     }
@@ -48,6 +50,11 @@ export class Runtime{
     }
     onClick(e){
         const newEvent = new ClickEvent(e)
+        this.sendEvent(newEvent) 
+    }
+    onRightClick(e){
+        e.preventDefault()
+        const newEvent = new RightClickEvent(e)
         this.sendEvent(newEvent) 
     }
     onKeyUp(e){

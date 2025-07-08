@@ -46,6 +46,21 @@ body{
     font-size: 18px;
     min-width: 0;
 }
+.btn{
+    border: none;
+    padding: 5px 10px;
+    font-size: 14px;
+    z-index: 10;
+    border-radius: 5px;
+    position: absolute;
+    background: white;
+    color: black;
+    transition: .2s filter;
+}
+.btn:hover{
+    transition: .2s filter;
+    filter: brightness(.5);
+}
 .hp{
     background: rgb(55, 250, 55);
     --value:1%;
@@ -59,4 +74,7 @@ body{
 }
 .eat{
     background: #ffb24d;
+}
+.invisible{
+    display: none;
 }
