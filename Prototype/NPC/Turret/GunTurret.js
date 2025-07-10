@@ -8,8 +8,8 @@ import { AimToPlayer } from "./AimToPlayerComponent.js";
 export class GunTurret extends Component{
     isReload = false
     scatter = 10
-    wGun = 100
-    hGun = 40
+    wGun = 64
+    hGun = 32
     constructor(entity){
         super("gunTurret",entity)
         setInterval(()=>this.isReload = true,100)

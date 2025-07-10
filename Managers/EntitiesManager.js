@@ -23,5 +23,8 @@ export class EntitiesManager{
     destroyEntity(entity){
         this.runtime.removeEntity(entity)
     }
+    addEntity(entity){
+        this.runtime.addEntity(entity)
+    }
 
 }

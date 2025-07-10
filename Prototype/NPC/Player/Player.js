@@ -8,6 +8,8 @@ import { Entity } from "../../../Entity.js";
 import { SpritePlayer } from "./SpritePlayer.js";
 import { UserInterfaceComponent } from "../../../Components/UserInterfaceComponent.js"
 import { BaseInfoPlayer } from "../../../UI/BaseInfoPlayer/BaseInfoPlayer.js"
+import { ContainerComponent } from "../../../Components/ContainerComponent.js";
+import { QuickSlotsPlayer } from "../../../UI/BaseInfoPlayer/QuickSlotsPlayer.js";
 
 
 export class Player extends Entity{
@@ -19,11 +21,13 @@ export class Player extends Entity{
         this.addComponent(new PhysicsComponent(this,"dynamic",1))
         this.addComponent(new CollisionComponent(this,TypeCollider["RECT"]))
         this.addComponent(new HealthComponent(this,100))  
+        this.addComponent(new ContainerComponent(this,36))
         if (body){
             this.addComponent(new CameraPlayerComponent(this))
             runtime.setPlayer(this)
             this.addComponent(new UserInterfaceComponent(this,[
-                new BaseInfoPlayer(this)
+                new BaseInfoPlayer(this),
+                new QuickSlotsPlayer(this)
             ]))
         }   
     }

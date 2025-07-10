@@ -43,9 +43,8 @@ export class PhysicsComponent extends Component{
         }else{
             this.setAngularVel(0)
         }
-        if (newX || newY){
-            this.setVelocity(new Vector(newX,newY))
-        }
+        this.setVelocity(new Vector(newX,newY))
+        
 
     }
     onCollide(event){

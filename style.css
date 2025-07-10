@@ -8,6 +8,9 @@ body{
     padding: 0;
     font-family: "Inter",sans-serif;
 }
+*{
+    user-select: none;
+}
 .ext-megabonus-main-content{
     display: none;
 }
@@ -36,6 +39,9 @@ body{
     --wall:#a84604;
     --turret:#4b4a4a;
     --turretGun:#9c5729;
+    --slot:#494949a2;
+    --slotSelect:#818181a2;
+    --slotBorder:#7e7e7e;
 }
 .info{
     --value:100%;
@@ -77,4 +83,36 @@ body{
 }
 .invisible{
     display: none;
+}
+.quick-slots{
+    position: absolute;
+    bottom: 0px;
+    display: grid;
+    gap: 20px;
+    left: 50%;
+    padding: 20px;
+    z-index: 10;
+    box-sizing: border-box;
+    transform: translateX(-50%);
+    grid-auto-columns: max-content;
+    grid-auto-flow: column;
+    grid-auto-rows: max-content;
+}
+.slot{
+    width: 50px;
+    height: 50px;
+    max-width: 50px;
+    max-height: 50px;
+    padding: 5px;
+    background:var(--slot);
+    border: 2px solid var(--slotBorder);
+}
+.selected{
+    background: var(--slotSelect);
+}
+.item-slot{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    image-rendering: pixelated;
 }
