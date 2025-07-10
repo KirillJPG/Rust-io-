@@ -5,6 +5,7 @@ import { PhysicsComponent } from "../../../Components/PhysicsComponent.js";
 import { GetRad } from "../../../Lib/GetRad.js";
 export class DoorComponent extends Component{
     isOpen = false
+    opening = false
     constructor(entity){
         super("door",entity)
         this.listenEvents[ new OpenDoorEvent().getName()] =(event)=>{
@@ -13,6 +14,7 @@ export class DoorComponent extends Component{
         this.addListensEntity()
     }
     open(event){
+        if (this.opening) return;
         const data = event.getEvent()
         if (data.door != this.getEntity()) return
         const transform = this.getEntity().getComponent(new TransformComponent().getName())
@@ -23,5 +25,7 @@ export class DoorComponent extends Component{
             phys.setAngularVel(GetRad(-50))
         }
         this.isOpen  = !this.isOpen
+        this.opening = true
+        setTimeout(()=>this.opening = false, 2000)
     }
 }

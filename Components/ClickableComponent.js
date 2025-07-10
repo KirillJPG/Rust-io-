@@ -3,12 +3,17 @@ import {MouseMoveEvent} from "../Events/MouseMoveEvent.js"
 import {TransformComponent} from "../Components/TransformComponent.js"
 import { CheckCollideRectRect } from "../Lib/Collides/ChecksCollide.js"
 import { Vector } from "../Lib/Vector2.js"
+import { ClickEvent } from "../Events/ClickEvent.js"
+import { ClickEntityEvent } from "../Events/ClickEntityEvent.js"
 export class ClickableComponent extends Component{
     hover = false
     constructor(entity){
         super("clickable",entity)
         this.listenEvents[new MouseMoveEvent().getName()] = (event)=>{
             this.move(event)
+        }
+        this.listenEvents[new ClickEvent().getName()] = (event) =>{
+            this.click(event)
         }
         this.addListensEntity()
     }
@@ -24,11 +29,20 @@ export class ClickableComponent extends Component{
         }
 
     }
+    click(event){
+        const data = event.getEvent()
+        if (this.hover){
+            const data = {target:this.getEntity()}
+            const event = new ClickEntityEvent(data)
+            this.sendEvent(event)
+        }
+    }
     move(event){
         const data = event.getEvent()    
+        const {x,y} = this.getCamera().getPosition()
         const xm = data.clientX
         const ym = data.clientY
-        const isHover = this.checkCollide(new Vector(xm,ym))
-        console.log(xm,ym,data,isHover)
+        const isHover = this.checkCollide(new Vector(xm+x,ym+y))
+        this.hover = isHover
     }
 }

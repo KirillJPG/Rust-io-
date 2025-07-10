@@ -4,8 +4,9 @@ export class Vector{
     x=0
     y=0
     constructor(x=0,y=0){
-        this.x = x
-        this.y = y
+        
+        this.x = +Number.parseFloat(x).toFixed(2)
+        this.y = +Number.parseFloat(y).toFixed(2)
     }
     getPos(){
         return {x:this.x,y:this.y}
@@ -15,6 +16,9 @@ export class Vector{
         const dx = this.x-x2
         const dy = this.y-y2
         return Math.sqrt(dx*dx+dy*dy)
+    }
+    dot(vec2){
+        return this.x*vec2.x+this.y*vec2.y 
     }
     getLength(){
         return Math.sqrt(this.x*this.x+this.y*this.y)

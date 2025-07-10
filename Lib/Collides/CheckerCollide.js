@@ -27,7 +27,6 @@ export class CheckerCollide{
         return this.intersects
     }
     getMinDistanceIntersects(vec){
-        const intersects = this.getIntersects()
         let min;
         this.intersects.forEach((e)=>{
             if (!min) min = e

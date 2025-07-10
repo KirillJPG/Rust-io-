@@ -18,6 +18,15 @@ export class TransformComponent extends Component{
     setRotate(rotate){
         this.rotate = rotate
     }
+    getAxes(){
+        const cos = Math.cos(this.rotate)
+        const sin = Math.sin(this.rotate)
+        const axes = [
+            new Vector(cos,sin),
+            new Vector(-sin,cos)
+        ]
+        return axes
+    }
     getRotate(){
         return this.rotate
     }
