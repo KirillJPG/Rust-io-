@@ -3,8 +3,8 @@ import { GetRad } from "../Lib/GetRad.js";
 import { TransformComponent } from "./TransformComponent.js";
 
 export class SpriteComponent extends Component{
-    constructor(entity){
-        super("Sprite",entity)
+    constructor(entity,name="sprite"){
+        super(name,entity)
     }
     draw(x,y,w,h,rotate){
     }

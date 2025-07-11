@@ -25,6 +25,9 @@ export class ContainerComponent extends Component{
     getSlots(){
         return this.slots
     }
+    getSlot(id){
+        return this.slots[id]
+    }
     setSlots(slots){
         this.slots = slots
     }

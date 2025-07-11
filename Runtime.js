@@ -2,6 +2,7 @@ import {ClickEvent} from "./Events/ClickEvent.js"
 import {KeyEvent} from "./Events/KeyEvent.js"
 import {KeyUpEvent} from "./Events/KeyUpEvent.js"
 import {MouseMoveEvent} from "./Events/MouseMoveEvent.js"
+import { MoveEvent } from "./Events/MoveEvent.js"
 import {RightClickEvent} from "./Events/RightClickEvent.js"
 
 export class Runtime{

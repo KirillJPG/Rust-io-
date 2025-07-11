@@ -10,6 +10,7 @@ import { UserInterfaceComponent } from "../../../Components/UserInterfaceCompone
 import { BaseInfoPlayer } from "../../../UI/BaseInfoPlayer/BaseInfoPlayer.js"
 import { ContainerComponent } from "../../../Components/ContainerComponent.js";
 import { QuickSlotsPlayer } from "../../../UI/BaseInfoPlayer/QuickSlotsPlayer.js";
+import { ItemHandComponent } from "../../../Components/ItemHandComponent.js";
 
 
 export class Player extends Entity{
@@ -22,6 +23,7 @@ export class Player extends Entity{
         this.addComponent(new CollisionComponent(this,TypeCollider["RECT"]))
         this.addComponent(new HealthComponent(this,100))  
         this.addComponent(new ContainerComponent(this,36))
+        this.addComponent(new ItemHandComponent(this))
         if (body){
             this.addComponent(new CameraPlayerComponent(this))
             runtime.setPlayer(this)
