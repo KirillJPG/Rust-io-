@@ -11,13 +11,14 @@ export class ItemComponent extends Component{
         this.icon = icon
         this.addListensEntity()
     }
+
     getIcon(){
         return this.icon
     }
     click(event){
         const data = event.getEvent()
         if (data.target == this.getEntity()){
-            const data = {item:this.getEntity(),pickuper:this.getEntity().getRuntime().getPlayer()}
+            const data = {item:this.getEntity(),pickuper:this.getEntity().getRuntime().getPlayer(),}
             const event = new PickUpItemEvent(data)
             this.sendEvent(event)
         }

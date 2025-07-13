@@ -11,8 +11,9 @@ import { TransformComponent } from "./TransformComponent.js";
 export {TypeCollider} from "../Enum/TypeCollider.js"
 
 export class CollisionComponent extends Component{
-    constructor(entity,typeBox=TypeCollider["BOX"]){
+    constructor(entity,typeBox=TypeCollider["BOX"],isRender = true){
         super("Collision",entity)
+        this.isRender = isRender
         this.listenEvents[new MoveEvent().getName()] = (event) =>{
             this.onMove(event)
         } 
@@ -67,6 +68,7 @@ export class CollisionComponent extends Component{
     }
 
     drawCollideBox(){
+        if (!this.isRender) return;
         const transform = this.getEntity().getComponent(new TransformComponent().getName())
         const {x,y} = transform.getPosition()
         const {w,h} = transform.getSize()

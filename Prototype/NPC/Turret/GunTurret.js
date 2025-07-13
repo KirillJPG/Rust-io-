@@ -23,12 +23,12 @@ export class GunTurret extends Component{
         const transform = this.getEntity().getComponent(new TransformComponent().getName())
         const gunRotator = this.getEntity().getComponent(new AimToPlayer().getName())
         const target = aim.getTarget()
-        const rotateGun = gunRotator.getRotateGun()+Random(-this.scatter,this.scatter)+(3.14*180/Math.PI)/4
+        const rotateGun = gunRotator.getRotateGun()+Random(-this.scatter,this.scatter)+90
         const posTurret = transform.getPosition()
         const {w,h} = transform.getSize()
-        const gunPos = new Vector(w,h).getRotate(rotateGun)
+        const gunPos = new Vector(w,h).getRotate(rotateGun-45)
         if (!target) return
-        const newBullet = new TurretBullet(this.getEntity().getRuntime(),posTurret.x+w/2+gunPos.x,posTurret.y+h/2+gunPos.y,rotateGun,4,this.getEntity())
+        const newBullet = new TurretBullet(this.getEntity().getRuntime(),posTurret.x+w/2+gunPos.x/2,posTurret.y+h/2+gunPos.y/2,rotateGun,10,this.getEntity())
         this.isReload = false
     }
     update(){

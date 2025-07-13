@@ -25,10 +25,11 @@ export class AimToPlayer extends Component{
             return;
         }
         const firstPlayerTransform = allPlayers[0].getComponent(new TransformComponent().getName())
+        const {w:wP,h:hP} = firstPlayerTransform.getSize()
         const cameraPos = this.getCamera().getPosition()
-        const posPlayer = firstPlayerTransform.getPosition().minus(cameraPos)
+        const posPlayer = firstPlayerTransform.getPosition().plus(new Vector(w/2,h/2)).minus(cameraPos)
         
-        const rotate = CalculateRotating(center.minus(cameraPos),posPlayer)+(3.14*180/Math.PI)/2
+        const rotate = CalculateRotating(center.minus(cameraPos),posPlayer)+90  
         this.setRotateGun(rotate)
         this.setTarget(allPlayers[0])
     }

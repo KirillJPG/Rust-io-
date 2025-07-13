@@ -39,9 +39,9 @@ export class TransformComponent extends Component{
         return {w,h}
     }
     setY(y){
-        this.position.y = y
+        this.position.y = +y.toFixed(0)
     }
     setX(x){
-        this.position.x = x
+        this.position.x = +x.toFixed(0)
     }
 }

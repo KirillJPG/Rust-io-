@@ -20,7 +20,6 @@ export class HealthComponent extends Component{
         const data = event.getEvent()
         if (data.our != this.getEntity() && data.other != this.getEntity())return
         const bullet = this.our == this.getEntity() ? data.other : data.our
-        console.log(bullet)
         const damage = bullet.getComponent(new BulletComponent().getName()).getDamage() ?? 0
         this.takeDamage(damage)
     }

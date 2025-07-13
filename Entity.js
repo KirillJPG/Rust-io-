@@ -22,6 +22,9 @@ export class Entity{
     getComponents(){
         return this.components
     }
+    removeComponent(compName){
+        this.components = this.components.filter(e=>e.getName()!= compName)
+    }
     addComponent(comp){
         if (this.getComponent(comp.getName())) return; 
         this.components.push(comp)

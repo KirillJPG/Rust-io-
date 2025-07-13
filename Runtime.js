@@ -18,8 +18,12 @@ export class Runtime{
         document.addEventListener("keyup",(e)=>this.onKeyUp(e))
         this.canvas.addEventListener("mousemove",(e)=>this.onMouseMove(e))
         this.canvas.addEventListener("contextmenu",(e)=>this.onRightClick(e))
-        setInterval(()=>this.update(),1)
+        requestAnimationFrame(()=>this.gameLoop())
         this.resize()
+    }
+    gameLoop(){
+        this.update()
+        requestAnimationFrame(()=>this.gameLoop())
     }
     getPlayer(){
         return this.player

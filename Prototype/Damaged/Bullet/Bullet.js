@@ -17,7 +17,7 @@ export class BulletComponent extends Component{
         this.entManager =entity &&  new EntitiesManager(this.getEntity().getRuntime())
         setTimeout(()=>{
             this.destroy()
-        },1000)
+        },2000)
         this.listenEvents[new CollideEvent().getName()] = (event)=>{
             this.collideEntity(event)
         }
@@ -46,7 +46,7 @@ export class BulletComponent extends Component{
     force(){
         const phys = this.getEntity().getComponent(new PhysicsComponent().getName())
         const rotate = this.rotateVelocity
-        phys.setVelocity(new Vector(this.speed.x,this.speed.y).getRotate(rotate))
+        phys.setVelocity(new Vector(this.speed.x,0).getRotate(rotate))
     }
     update(){
         this.force()

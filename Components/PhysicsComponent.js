@@ -16,14 +16,13 @@ export class PhysicsComponent extends Component{
         this.type = type
         this.friction = Math.min(friction,1)
         this.mass = mass
+
         this.listenEvents[new CollideEvent().getName()] = (event)=>this.onCollide(event)
         this.addListensEntity()
     }
     setVelocity(velocity){
-        if (velocity.x||velocity.y){
-            if ( this.getEntity().name =="ball"){
-                console.log(velocity)
-            }
+        if (isNaN(velocity.x )||isNaN(velocity.y)){
+            return 
         }
         this.velocity = new Vector(velocity.x,velocity.y)
     }
@@ -49,6 +48,7 @@ export class PhysicsComponent extends Component{
     }
     onCollide(event){
         const {other,our,normal} = event.getEvent()
+        if (!other || !our || !normal) return
         const physOther = other.getComponent(this.getName())
         const physOur = our.getComponent(this.getName())
         const {x:vx1,y:vy1} = physOther.getVelocity()
@@ -62,7 +62,7 @@ export class PhysicsComponent extends Component{
         }
         const velAlongNormal = relative.x * normal.x + relative.y * normal.y
         if (velAlongNormal >-0.1) return
-   
+        
         let j = (-(1+1) * velAlongNormal) / (1 / mass1 + 1/mass2)
         const impulse = new Vector(j*normal.x,j*normal.y)
 
@@ -70,7 +70,10 @@ export class PhysicsComponent extends Component{
         const newVY2 = 1/mass2 * impulse.y
         const newVX = -1/mass1*impulse.x
         const newVY = -1/mass1*impulse.y
-        
+
+        if (isNaN(newVX) || isNaN(newVX2) || isNaN(newVY) || isNaN(newVY2) ) {
+            return
+        }
         physOther.setVelocity(new Vector(newVX,newVY))
         if (physOur.getType() != "static"){
             physOur.setVelocity(new Vector(newVX2,newVY2))

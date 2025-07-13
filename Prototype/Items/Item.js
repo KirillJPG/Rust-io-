@@ -1,6 +1,7 @@
 import { ClickableComponent } from "../../Components/ClickableComponent.js";
 import { CollisionComponent, TypeCollider } from "../../Components/CollisionComponent.js";
 import { ItemComponent } from "../../Components/ItemComponent.js";
+import { ItemContainerComponent } from "../../Components/ItemContainerComponent.js";
 import { PhysicsComponent } from "../../Components/PhysicsComponent.js";
 import { TransformComponent } from "../../Components/TransformComponent.js";
 import { Entity } from "../../Entity.js";

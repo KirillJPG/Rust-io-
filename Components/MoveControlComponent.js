@@ -8,10 +8,10 @@ import { PhysicsComponent } from "./PhysicsComponent.js";
 import { TransformComponent } from "./TransformComponent.js";
 
 export class MoveControlComponent extends Component{
-    speed = 100000 // 100km/h
+    speed = 120 // 100km/h
     moveX = 0
     moveY = 0
-    constructor(entity,speed=100000){
+    constructor(entity,speed=120){
         super("MoveControl",entity)
         this.speed = speed
         this.listenEvents[new KeyEvent().getName()] = (event) =>this.onKeyDown(event)
@@ -50,7 +50,7 @@ export class MoveControlComponent extends Component{
         if (moveSpeed > this.speed) {
             return
         }
-        phys.setVelocity(new Vector(this.moveX*this.speed/1000,this.moveY*this.speed/1000))
+        phys.setVelocity(new Vector(this.moveX*this.speed/60,this.moveY*this.speed/60))
         const eventData = {newPosX:x,newPosY:y,w,h,rotate,component:this}
         const event = new MoveEvent(eventData)
         this.sendEvent(event)
